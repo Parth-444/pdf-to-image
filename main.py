@@ -1,6 +1,6 @@
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from fastapi.responses import JSONResponse
-import pymupdf  # ✅ NEW import (not fitz)
+import pymupdf  
 import base64
 
 app = FastAPI(title="PDF to Images API")
@@ -18,7 +18,7 @@ async def convert_pdf_to_images(
     try:
         pdf_bytes = await file.read()
 
-        # ✅ Open using pymupdf
+        
         doc = pymupdf.open(stream=pdf_bytes, filetype="pdf")
 
         images = []
@@ -45,6 +45,3 @@ async def convert_pdf_to_images(
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
-@app.get("/health")
-async def health():
-    return {"status": "healthy"}
