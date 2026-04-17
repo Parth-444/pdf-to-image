@@ -45,3 +45,6 @@ async def convert_pdf_to_images(
 
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+@app.get("/health")
+async def health():
+    return {"status": "healthy"}
